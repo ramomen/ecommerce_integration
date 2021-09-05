@@ -48,18 +48,90 @@ class OpenCartService
 
             return response('Something went wrong',403);
         }
-
-    
-
-
-    //     $headers = [
-    //         "content-type" => "multipart/form-data",
-    //         "accept" => "application/json"
-    //     ];
-
-    //    $response = Http::withHeaders($headers)->post($baseUrl.'/index.php?route=api/login',$data);
-    //    return $response->status();
     }
+
+    public function get($baseUrl,$suffix,$username,$key)
+    {
+        $token = $this->token($baseUrl,$username,$key);
+
+        $baseHeaders = [
+            'Accept' => 'application/json',
+            'content-type'=> 'application-json'
+
+        ];
+
+        $response = Http::withHeaders($baseHeaders)->get($this->baseUrl.$suffix.'&api_token='.$token);
+
+        return $response;
+    }
+
+    public function post($baseUrl,$suffix,$username,$key,$data)
+    {
+        $token = $this->token($baseUrl,$username,$key);
+
+        $baseHeaders = [
+            'Accept' => 'application/json',
+            'content-type'=> 'application-json'
+        ];
+        
+
+
+        $response = Http::withHeaders($baseHeaders)->post($this->baseUrl.$suffix.'&api_token='.$token,$data);
+
+        return $response;
+    }
+
+
+    public function patch($baseUrl,$suffix,$username,$key,$data)
+    {
+        $token = $this->token($baseUrl,$username,$key);
+
+        $baseHeaders = [
+            'Accept' => 'application/json',
+            'content-type'=> 'application-json'
+        ];
+        
+        $response = Http::withHeaders($baseHeaders)->patch($this->baseUrl.$suffix.'&api_token='.$token,$data);
+
+        return $response;
+    }
+
+    public function delete($baseUrl,$suffix,$username,$key,$data)
+    {
+        $token = $this->token($baseUrl,$username,$key);
+
+        $baseHeaders = [
+            'Accept' => 'application/json',
+            'content-type'=> 'application-json'
+  
+
+        ];
+        
+
+
+        $response = Http::withHeaders($baseHeaders)->delete($this->baseUrl.$suffix.'&api_token='.$token,$data);
+
+        return $response;
+    }
+
+    public function put($baseUrl,$suffix,$username,$key,$data)
+    {
+        $token = $this->token($baseUrl,$username,$key);
+
+        $baseHeaders = [
+            'Accept' => 'application/json',
+            'content-type'=> 'application-json'
+  
+
+        ];
+        
+
+
+        $response = Http::withHeaders($baseHeaders)->put($this->baseUrl.$suffix.'&api_token='.$token,$data);
+
+        return $response;
+    }
+
 
 
 
